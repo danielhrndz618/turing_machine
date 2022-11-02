@@ -4,4 +4,5 @@ public:
   char write_symbol;
   int command;
   Symbol(char, char, int);
+  Symbol(char);
 };

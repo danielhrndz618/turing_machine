@@ -7,7 +7,9 @@ Symbol::Symbol(char s, char w, int c){
   this->command = c;
 }
 
-
+Symbol::Symbol(char s){
+  this->symbol = s;
+}
 
 
 

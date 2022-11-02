@@ -45,11 +45,10 @@ std::string Machine::trimString(int x, int y, std::string ref){
 
 std::vector<std::string> Machine::split(std::string line){
   line.erase(remove(line.begin(), line.end(), ' '), line.end());
-  std::cout << "linea sin espacios: " << line << std::endl;
   std::vector<std::string> words;
   std::string aux = "";
   for(int i = 0; i < line.length(); i++){
-    if(line[i] != ',' && line[i] != ')'){
+    if(line[i] != ',' && i != line.length()-1){
       aux += line[i];
     }
     else{
@@ -64,7 +63,7 @@ std::vector<std::string> Machine::split(std::string line){
 void Machine::analyzer(std::string line){
   std::string aux = "";
   for(int i = 0; i < line.length(); i++){
-    if(line[i] == '('){
+    if(line[i] == '(' || line[i] == '['){
       break;
     }
     else{
@@ -74,6 +73,7 @@ void Machine::analyzer(std::string line){
     }
   }
   
+  std::cout << "aux: " << aux << std::endl;
   if(aux == "Alfabeto"){
     int x = this->getIndex(line, '(');
     int y = this->getIndex(line, ')');
@@ -81,17 +81,17 @@ void Machine::analyzer(std::string line){
     std::vector<std::string> words = this->split(substring);
     for(int i = 0; i < words.size(); i++)
     {
-      std::cout << "palabra: " << words[i] << std::endl;
+        this->tokens.push_back(words[i]);
     }
   }
-
-
-
-
-
+  if(aux == "MT"){
+    int x = this->getIndex(line, '[');
+    int y = this->getIndex(line, ']');
+    std::string mc_string = line.substr(x, y);
+    std::cout << "mc_string: " << mc_string << std::endl;
+  }
   /* std::cout << "Filtered Line: " << aux << std::endl; */
 }
-
 
 
 
