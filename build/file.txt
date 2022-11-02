@@ -1,0 +1,6 @@
+Estado(estado1, estado2, estado3, estado4)
+Inicial(estado1)
+Ha(estadoi)
+He(estadoi)
+Alfabeto(simbolo1, simbolo2, simbolo3, simbolo4)
+MT(estadoM, simbolo_leido) = (estadoK, simbolo_escrito, Movimiento)
