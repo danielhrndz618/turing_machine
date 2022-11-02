@@ -15,4 +15,5 @@ public:
   void analyzer(std::string);
   int getIndex(std::string, char);
   std::string trimString(int, int, std::string);
+  std::vector<std::string> split(std::string);
 };

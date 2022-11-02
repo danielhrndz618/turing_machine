@@ -43,6 +43,24 @@ std::string Machine::trimString(int x, int y, std::string ref){
 }
 
 
+std::vector<std::string> Machine::split(std::string line){
+  line.erase(remove(line.begin(), line.end(), ' '), line.end());
+  std::cout << "linea sin espacios: " << line << std::endl;
+  std::vector<std::string> words;
+  std::string aux = "";
+  for(int i = 0; i < line.length(); i++){
+    if(line[i] != ',' && line[i] != ')'){
+      aux += line[i];
+    }
+    else{
+      words.push_back(aux);
+      aux = "";
+    }
+  }
+  return words;
+}
+
+
 void Machine::analyzer(std::string line){
   std::string aux = "";
   for(int i = 0; i < line.length(); i++){
@@ -50,10 +68,28 @@ void Machine::analyzer(std::string line){
       break;
     }
     else{
-      aux += line[i];
+      if(line[i] != ' '){
+        aux += line[i];
+      }
     }
   }
-  std::cout << "Filtered Line: " << aux << std::endl;
+  
+  if(aux == "Alfabeto"){
+    int x = this->getIndex(line, '(');
+    int y = this->getIndex(line, ')');
+    std::string substring = line.substr(x+1, y);
+    std::vector<std::string> words = this->split(substring);
+    for(int i = 0; i < words.size(); i++)
+    {
+      std::cout << "palabra: " << words[i] << std::endl;
+    }
+  }
+
+
+
+
+
+  /* std::cout << "Filtered Line: " << aux << std::endl; */
 }
 
 
