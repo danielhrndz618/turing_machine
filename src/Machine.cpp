@@ -1,4 +1,5 @@
 #include "./../include/Machine.h"
+#include <iterator>
 
 
 Machine::Machine(){
@@ -28,6 +29,19 @@ void Machine::loadFile(std::string filename){
     std::cout << "No se pudo abrir \n";
   }
 }
+
+int Machine::getIndex(std::string ref, char c){
+  auto it = std::find(ref.begin(), ref.end(), c);
+  if(it != ref.end()){
+    return std::distance(ref.begin(), it);
+  }
+  return -1;
+}
+
+std::string Machine::trimString(int x, int y, std::string ref){
+  return ref.substr(0, x) + ref.substr(y, ref.length()-1);
+}
+
 
 void Machine::analyzer(std::string line){
   std::string aux = "";

@@ -13,4 +13,6 @@ public:
   Machine();
   void loadFile(std::string);
   void analyzer(std::string);
+  int getIndex(std::string, char);
+  std::string trimString(int, int, std::string);
 };
