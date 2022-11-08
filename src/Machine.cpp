@@ -123,3 +123,13 @@ void Machine::listen(){
   std::cin >> this->tape;
 }
 
+
+Symbol Machine::getSymbol(std::string ref){
+  for(Symbol sym : this->symbols){
+    if(ref == sym.symbol){
+      return sym;
+    }
+  }
+  return Symbol("", "", 0);
+}
+
