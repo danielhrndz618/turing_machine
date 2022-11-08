@@ -87,8 +87,14 @@ void Machine::analyzer(std::string line){
   if(aux == "MT"){
     int x = this->getIndex(line, '[');
     int y = this->getIndex(line, ']');
-    std::string mc_string = line.substr(x, y);
+    std::string mc_string = line.substr(x+1, y-1);
     std::cout << "mc_string: " << mc_string << std::endl;
+    std::vector<std::string> words = this->split(mc_string);
+    for(int i = 0; i < words.size(); i++)
+    {
+        /* this->tokens.push_back(words[i]); */
+        std::cout << words[i] << std::endl;
+    }
   }
   /* std::cout << "Filtered Line: " << aux << std::endl; */
 }
