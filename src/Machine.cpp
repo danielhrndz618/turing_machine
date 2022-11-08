@@ -1,5 +1,6 @@
 #include "./../include/Machine.h"
 #include <iterator>
+#include <vector>
 
 
 Machine::Machine(){
@@ -84,23 +85,32 @@ void Machine::analyzer(std::string line){
         this->tokens.push_back(words[i]);
     }
   }
+
   if(aux == "MT"){
     int x = this->getIndex(line, '[');
     int y = this->getIndex(line, ']');
+    std::string ref_line = line;
     std::string mc_string = line.substr(x+1, y-1);
     std::cout << "mc_string: " << mc_string << std::endl;
     std::vector<std::string> words = this->split(mc_string);
+    std::string symbol_ref = words[1];
+    words = std::vector<std::string>();
+    int x1 = this->getIndex(line,'(');
+    int y1 = this->getIndex(line,')');
+    words = this->split(ref_line.substr(x1+1, y1-1));
     for(int i = 0; i < words.size(); i++)
     {
-        /* this->tokens.push_back(words[i]); */
-        std::cout << words[i] << std::endl;
+        this->initializeSymbols(symbol_ref,words[1],words[2]);
     }
   }
-  /* std::cout << "Filtered Line: " << aux << std::endl; */
 }
 
 void Machine::initializeSymbols(std::string symbol, std::string symbol_to_write, std::string move){
-  Symbol sim = Symbol(symbol, symbol_to_write, move);
+  int m = 0;
+  if(move == "D") m = 1;
+  if(move == "I") m = -1;
+  Symbol sim = Symbol(symbol, symbol_to_write, m);
+  this->symbols.push_back(sim);   
 }
 
 
