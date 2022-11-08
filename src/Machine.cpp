@@ -98,10 +98,7 @@ void Machine::analyzer(std::string line){
     int x1 = this->getIndex(line,'(');
     int y1 = this->getIndex(line,')');
     words = this->split(ref_line.substr(x1+1, y1-1));
-    for(int i = 0; i < words.size(); i++)
-    {
-        this->initializeSymbols(symbol_ref,words[1],words[2]);
-    }
+    this->initializeSymbols(symbol_ref,words[1],words[2]);
   }
 
   this->run();
@@ -117,10 +114,12 @@ void Machine::initializeSymbols(std::string symbol, std::string symbol_to_write,
 
 
 void Machine::run(){
+  std::cout << "------------------------" << std::endl;
   std::cout << "in run method" << std::endl;
   for(std::string str : this->tokens){
     std::cout << str << std::endl;
   }
+  std::cout << "------------------------" << std::endl;
   for(Symbol s : this->symbols){
     std::cout << s.write_symbol << std::endl;
   }
