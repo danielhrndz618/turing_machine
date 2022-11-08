@@ -1,5 +1,6 @@
 #include "./../include/Machine.h"
 #include <iterator>
+#include <vector>
 
 
 Machine::Machine(){
@@ -23,6 +24,7 @@ void Machine::loadFile(std::string filename){
       std::cout << "Cadena: " << cadena << std::endl;
       this->analyzer(cadena);
     }
+    this->run();
     file.close();
   }
   else{
@@ -43,22 +45,112 @@ std::string Machine::trimString(int x, int y, std::string ref){
 }
 
 
-void Machine::analyzer(std::string line){
+std::vector<std::string> Machine::split(std::string line){
+  line.erase(remove(line.begin(), line.end(), ' '), line.end());
+  std::vector<std::string> words;
   std::string aux = "";
   for(int i = 0; i < line.length(); i++){
-    if(line[i] == '('){
-      break;
-    }
-    else{
+    if(line[i] != ',' && i != line.length()-1){
       aux += line[i];
     }
+    else{
+      words.push_back(aux);
+      aux = "";
+    }
   }
-  std::cout << "Filtered Line: " << aux << std::endl;
+  return words;
 }
 
 
+void Machine::analyzer(std::string line){
+  std::string aux = "";
+  for(int i = 0; i < line.length(); i++){
+    if(line[i] == '(' || line[i] == '['){
+      break;
+    }
+    else{
+      if(line[i] != ' '){
+        aux += line[i];
+      }
+    }
+  }
+  
+  if(aux == "Alfabeto"){
+    int x = this->getIndex(line, '(');
+    int y = this->getIndex(line, ')');
+    std::string substring = line.substr(x+1, y);
+    std::vector<std::string> words = this->split(substring);
+    for(int i = 0; i < words.size(); i++)
+    {
+        this->tokens.push_back(words[i]);
+    }
+  }
+
+  if(aux == "MT"){
+    int x = this->getIndex(line, '[');
+    int y = this->getIndex(line, ']');
+    std::string ref_line = line;
+    std::string mc_string = line.substr(x+1, y-1);
+    std::vector<std::string> words = this->split(mc_string);
+    std::string symbol_ref = words[1];
+    words = std::vector<std::string>();
+    int x1 = this->getIndex(line,'(');
+    int y1 = this->getIndex(line,')');
+    words = this->split(ref_line.substr(x1+1, y1-1));
+    this->initializeSymbols(symbol_ref,words[1],words[2]);
+  }
+}
+
+void Machine::initializeSymbols(std::string symbol, std::string symbol_to_write, std::string move){
+  int m = 0;
+  if(move == "D") m = 1;
+  if(move == "I") m = -1;
+  Symbol sim = Symbol(symbol, symbol_to_write, m);
+  this->symbols.push_back(sim);   
+}
 
 
+void Machine::run(){
+  this->listen();
+  this->result = std::vector<std::string>(this->tape.length());
+  for(int i = 0; i < this->tape.length(); i++){
+    std::string s(1, this->tape[i]);
+    Symbol symbol = this->getSymbol(s);
+    this->result[this->pointer] = symbol.write_symbol;
+    this->pointer += symbol.command;
+  }
+  this->print();
+}
 
 
+void Machine::listen(){
+  std::cout << "Write your string: ";
+  std::cin >> this->tape;
+  this->spaces = std::vector<bool>(this->tape.length());
+  for(int i = 0; i < this->spaces.size(); i++){
+    this->spaces[i] = false;
+  }
+}
+
+
+Symbol Machine::getSymbol(std::string ref){
+  for(Symbol sym : this->symbols){
+    if(ref == sym.symbol){
+      return sym;
+    }
+  }
+  return Symbol("", "", 0);
+}
+
+
+void Machine::print()
+{
+  std::cout << "Resultado final" << std::endl; 
+  std::cout << "------------------------------" << std::endl; 
+  std::cout << this->tape << "    --   ";
+  for(std::string str : this->result){
+    std::cout << str; 
+  }
+  std::cout << std::endl;
+}
 
