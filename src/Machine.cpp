@@ -120,7 +120,7 @@ void Machine::run(){
   }
   std::cout << "------------------------" << std::endl;
   for(Symbol s : this->symbols){
-    std::cout << s.write_symbol << std::endl;
+    std::cout << s.write_symbol <<  " - Move: "<< s.command << std::endl;
   }
 }
 
