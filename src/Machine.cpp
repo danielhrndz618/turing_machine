@@ -113,7 +113,8 @@ void Machine::run(){
   this->listen();
   for(this->pointer = 0; this->pointer < this->tape.length(); this->pointer++){
     std::string s(1, this->tape[this->pointer]);
-
+    Symbol symbol = this->getSymbol(s);
+    std::cout << "Symbolo: " << s << " write: " << symbol.write_symbol << " m: " << symbol.command << std::endl;
   }
 }
 
