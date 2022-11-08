@@ -147,8 +147,10 @@ void Machine::print()
 {
   std::cout << "Resultado final" << std::endl; 
   std::cout << "------------------------------" << std::endl; 
+  std::cout << this->tape << "    --   ";
   for(std::string str : this->result){
-    std::cout << str << std::endl; 
+    std::cout << str; 
   }
+  std::cout << std::endl;
 }
 
