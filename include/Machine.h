@@ -27,4 +27,6 @@ public:
   Symbol getSymbol(std::string);
   int getSize();
   void print();
+  int getIndex(std::string, char);
+  std::string trimString(int, int, std::string);
 };
