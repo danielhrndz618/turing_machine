@@ -11,6 +11,7 @@ public:
   std::vector<Symbol> symbols;
   std::vector<std::string> tokens;
   std::vector<std::string> reserved_words;
+  std::vector<bool> spaces;
   std::string tape;
   std::string result;
 
@@ -24,4 +25,5 @@ public:
   std::string trimString(int, int, std::string);
   std::vector<std::string> split(std::string);
   Symbol getSymbol(std::string);
+  int getSize();
 };
