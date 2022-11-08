@@ -24,6 +24,7 @@ void Machine::loadFile(std::string filename){
       std::cout << "Cadena: " << cadena << std::endl;
       this->analyzer(cadena);
     }
+    this->run();
     file.close();
   }
   else{
@@ -100,8 +101,6 @@ void Machine::analyzer(std::string line){
     words = this->split(ref_line.substr(x1+1, y1-1));
     this->initializeSymbols(symbol_ref,words[1],words[2]);
   }
-
-  this->run();
 }
 
 void Machine::initializeSymbols(std::string symbol, std::string symbol_to_write, std::string move){
