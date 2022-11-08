@@ -4,8 +4,7 @@
 
 
 Machine::Machine(){
-  this->pointer = 0;
-  this->reserved_words.push_back("Estados");
+  this->pointer = 0; this->reserved_words.push_back("Estados");
   this->reserved_words.push_back("Inicial");
   this->reserved_words.push_back("Ha");
   this->reserved_words.push_back("He");
@@ -75,7 +74,6 @@ void Machine::analyzer(std::string line){
     }
   }
   
-  std::cout << "aux: " << aux << std::endl;
   if(aux == "Alfabeto"){
     int x = this->getIndex(line, '(');
     int y = this->getIndex(line, ')');
@@ -92,7 +90,6 @@ void Machine::analyzer(std::string line){
     int y = this->getIndex(line, ']');
     std::string ref_line = line;
     std::string mc_string = line.substr(x+1, y-1);
-    std::cout << "mc_string: " << mc_string << std::endl;
     std::vector<std::string> words = this->split(mc_string);
     std::string symbol_ref = words[1];
     words = std::vector<std::string>();
@@ -113,16 +110,16 @@ void Machine::initializeSymbols(std::string symbol, std::string symbol_to_write,
 
 
 void Machine::run(){
-  std::cout << "------------------------" << std::endl;
-  std::cout << "in run method" << std::endl;
-  for(std::string str : this->tokens){
-    std::cout << str << std::endl;
-  }
-  std::cout << "------------------------" << std::endl;
-  for(Symbol s : this->symbols){
-    std::cout << s.write_symbol <<  " - Move: "<< s.command << std::endl;
+  this->listen();
+  for(this->pointer = 0; this->pointer < this->tape.length(); this->pointer++){
+    std::string s(1, this->tape[this->pointer]);
+
   }
 }
 
 
+void Machine::listen(){
+  std::cout << "Write your string: ";
+  std::cin >> this->tape;
+}
 
