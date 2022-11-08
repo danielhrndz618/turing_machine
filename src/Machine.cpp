@@ -116,7 +116,7 @@ void Machine::run(){
   for(int i = 0; i < this->tape.length(); i++){
     std::string s(1, this->tape[i]);
     Symbol symbol = this->getSymbol(s);
-    this->result[this->pointer] = s;
+    this->result[this->pointer] = symbol.write_symbol;
     this->pointer += symbol.command;
   }
   this->print();
