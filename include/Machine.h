@@ -12,6 +12,8 @@ public:
   std::vector<std::string> tokens;
   std::vector<std::string> reserved_words;
   std::string tape;
+  std::string result;
+
   Machine();
   void loadFile(std::string);
   void analyzer(std::string);
@@ -21,4 +23,5 @@ public:
   int getIndex(std::string, char);
   std::string trimString(int, int, std::string);
   std::vector<std::string> split(std::string);
+  Symbol getSymbol(std::string);
 };
