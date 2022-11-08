@@ -14,6 +14,7 @@ public:
   Machine();
   void loadFile(std::string);
   void analyzer(std::string);
+  void initializeSymbols(std::string, std::string, std::string); // method for create symbols with constrctor
   int getIndex(std::string, char);
   std::string trimString(int, int, std::string);
   std::vector<std::string> split(std::string);

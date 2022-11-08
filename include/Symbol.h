@@ -1,8 +1,10 @@
+#include <iostream>
+
 class Symbol{
 public:
-  char symbol;
-  char write_symbol;
+  std::string symbol;
+  std::string write_symbol;
   int command;
-  Symbol(char, char, int);
-  Symbol(char);
+  Symbol(std::string,std::string, int);
+  Symbol(std::string);
 };

@@ -99,7 +99,9 @@ void Machine::analyzer(std::string line){
   /* std::cout << "Filtered Line: " << aux << std::endl; */
 }
 
-
+void Machine::initializeSymbols(std::string symbol, std::string symbol_to_write, std::string move){
+  Symbol sim = Symbol(symbol, symbol_to_write, move);
+}
 
 
 

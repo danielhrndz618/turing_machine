@@ -1,13 +1,13 @@
 #include "./../include/Symbol.h"
 
 
-Symbol::Symbol(char s, char w, int c){
+Symbol::Symbol(std::string s, std::string w, int c){
   this->symbol = s;
   this->write_symbol = w;
   this->command = c;
 }
 
-Symbol::Symbol(char s){
+Symbol::Symbol(std::string s){
   this->symbol = s;
 }
 
