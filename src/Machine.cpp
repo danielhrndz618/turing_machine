@@ -103,6 +103,8 @@ void Machine::analyzer(std::string line){
         this->initializeSymbols(symbol_ref,words[1],words[2]);
     }
   }
+
+  this->run();
 }
 
 void Machine::initializeSymbols(std::string symbol, std::string symbol_to_write, std::string move){
@@ -113,6 +115,16 @@ void Machine::initializeSymbols(std::string symbol, std::string symbol_to_write,
   this->symbols.push_back(sim);   
 }
 
+
+void Machine::run(){
+  std::cout << "in run method" << std::endl;
+  for(std::string str : this->tokens){
+    std::cout << str << std::endl;
+  }
+  for(Symbol s : this->symbols){
+    std::cout << s.write_symbol << std::endl;
+  }
+}
 
 
 
