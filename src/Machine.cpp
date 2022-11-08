@@ -111,10 +111,10 @@ void Machine::initializeSymbols(std::string symbol, std::string symbol_to_write,
 
 void Machine::run(){
   this->listen();
+  this->result = this->tape;
   for(this->pointer = 0; this->pointer < this->tape.length(); this->pointer++){
     std::string s(1, this->tape[this->pointer]);
     Symbol symbol = this->getSymbol(s);
-    std::cout << "Symbolo: " << s << " write: " << symbol.write_symbol << " m: " << symbol.command << std::endl;
   }
 }
 
@@ -122,6 +122,10 @@ void Machine::run(){
 void Machine::listen(){
   std::cout << "Write your string: ";
   std::cin >> this->tape;
+  this->spaces = std::vector<bool>(this->tape.length());
+  for(int i = 0; i < this->spaces.size(); i++){
+    this->spaces[i] = false;
+  }
 }
 
 
@@ -133,4 +137,6 @@ Symbol Machine::getSymbol(std::string ref){
   }
   return Symbol("", "", 0);
 }
+
+
 
