@@ -4,7 +4,8 @@
 
 
 Machine::Machine(){
-  this->pointer = 0; this->reserved_words.push_back("Estados");
+  this->pointer = 0;
+  this->reserved_words.push_back("Estados");
   this->reserved_words.push_back("Inicial");
   this->reserved_words.push_back("Ha");
   this->reserved_words.push_back("He");
@@ -111,11 +112,14 @@ void Machine::initializeSymbols(std::string symbol, std::string symbol_to_write,
 
 void Machine::run(){
   this->listen();
-  this->result = this->tape;
-  for(this->pointer = 0; this->pointer < this->tape.length(); this->pointer++){
-    std::string s(1, this->tape[this->pointer]);
+  this->result = std::vector<std::string>(this->tape.length());
+  for(int i = 0; i < this->tape.length(); i++){
+    std::string s(1, this->tape[i]);
     Symbol symbol = this->getSymbol(s);
+    this->result[this->pointer] = s;
+    this->pointer += symbol.command;
   }
+  this->print();
 }
 
 
@@ -139,4 +143,12 @@ Symbol Machine::getSymbol(std::string ref){
 }
 
 
+void Machine::print()
+{
+  std::cout << "Resultado final" << std::endl; 
+  std::cout << "------------------------------" << std::endl; 
+  for(std::string str : this->result){
+    std::cout << str << std::endl; 
+  }
+}
 
