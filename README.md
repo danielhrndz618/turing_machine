@@ -24,7 +24,7 @@
   git clone https://github.com/Olstertecn11/turing_mac.git
   cd turing_machine
   g++ -std=c++17 ./src/main.cpp -o ./build/main
-  ./build/main ~/turing_machine/build/file.txtd 
+  ./build/main ./build/file.txt 
 ```
 
 ---------------
